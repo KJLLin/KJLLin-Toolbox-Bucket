@@ -1,0 +1,29 @@
+{
+    "version": "1.2.0",
+    "description": "Minecraft 启动器，HMCL 内核 + PCL 视觉风格",
+    "homepage": "https://github.com/KJLLin/HPCL",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/KJLLin/HPCL/releases/download/v1.2.0/hpcl-1.2.0.zip",
+            "hash": "sha256:95179dc77b77492bdc4d7b71bdf9f86a9ee955c0466f50f052e4715815fffe84"
+        }
+    },
+    "bin": "HPCL.exe",
+    "shortcuts": [
+        [
+            "HPCL.exe",
+            "HPCL 启动器"
+        ]
+    ],
+    "checkver": {
+        "github": "KJLLin/HPCL"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/KJLLin/HPCL/releases/download/v$version/hpcl-$version.zip"
+            }
+        }
+    }
+}

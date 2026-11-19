@@ -1,0 +1,23 @@
+{
+    "version": "0.9.4",
+    "description": "洛谷题目与测试数据导出工具",
+    "homepage": "https://github.com/KJLLin/luogu-export",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/KJLLin/luogu-export/releases/download/v0.9.4/luogu-export-0.9.4.zip",
+            "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+    },
+    "bin": "luogu-export.exe",
+    "checkver": {
+        "github": "KJLLin/luogu-export"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/KJLLin/luogu-export/releases/download/v$version/luogu-export-$version.zip"
+            }
+        }
+    }
+}
