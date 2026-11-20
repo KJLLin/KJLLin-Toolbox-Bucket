@@ -11,19 +11,19 @@ KJLLin Toolbox（UniGetUI 改造版）的应用清单。
 
 ## 怎么装
 
-客户端（KJLLin Toolbox）需本机已装 Scoop。没有的话先：
+**不用手装 Scoop。** KJLLin Toolbox 安装包收尾时会以当前用户身份、隐藏窗口跑内置的 `EnsureScoop.ps1`：
+
+1. 没有 `scoop` 就装官方版（`get.scoop.sh`）
+2. 补 `git`（`scoop bucket add` 需要）
+3. 注册 `toolbox` / `toolbox-beta` 两个 bucket
+
+日志在 `%TEMP%\kjllin-toolbox-scoop.log`；任何一步失败都不影响安装成功。
+装完打开客户端，首页（Discover）直接就是本源的应用列表。
+
+手动验证：
 
 ```powershell
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-irm get.scoop.sh | iex
-```
-
-然后打开客户端，`toolbox` 源里应该能看到 `hpcl`，点安装即可（HPCL 需要 Java 17+）。
-
-命令行验证：
-
-```powershell
-scoop bucket add toolbox https://github.com/KJLLin/KJLLin-Toolbox
+scoop bucket add toolbox https://github.com/KJLLin/KJLLin-Toolbox   # 客户端已自动做
 scoop install toolbox/hpcl
 hpcl
 ```
