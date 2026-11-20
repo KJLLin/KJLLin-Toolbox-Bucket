@@ -1,0 +1,24 @@
+{
+    "version": "14.1.1",
+    "description": "递归文本搜索工具（样例包，用于验证分发链路）",
+    "homepage": "https://github.com/BurntSushi/ripgrep",
+    "license": "MIT",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/BurntSushi/ripgrep/releases/download/14.1.1/ripgrep-14.1.1-x86_64-pc-windows-msvc.zip",
+            "hash": "sha256:d0f534024c42afd6cb4d38907c25cd2b249b79bbe6cc1dbee8e3e37c2b6e25a1",
+            "extract_dir": "ripgrep-14.1.1-x86_64-pc-windows-msvc"
+        }
+    },
+    "bin": "rg.exe",
+    "checkver": {
+        "github": "BurntSushi/ripgrep"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/BurntSushi/ripgrep/releases/download/$version/ripgrep-$version-x86_64-pc-windows-msvc.zip"
+            }
+        }
+    }
+}
