@@ -6,9 +6,8 @@ KJLLin Toolbox（UniGetUI 改造版）的应用清单。
 
 | 清单 | 状态 |
 |---|---|
-| `bucket/ripgrep.json` | ✅ 真实可安装（官方 Release 资源，哈希已核对）—— 用来验证“发现 → 安装 → 更新”整条链路 |
-| `bucket/hpcl.json` | ⚠️ 占位：`KJLLin/HPCL` 仓库尚不存在，装不上 |
-| `bucket/luogu-export.json` | ⚠️ 占位：哈希是全 0，需替换真实 zip |
+| `bucket/hpcl.json` | ✅ **你的应用**：HPCL Launcher 3.17.0，指向 `KJLLin/HPCL-Launcher` 真实 Release，SHA256 已复算比对 |
+| `bucket/ripgrep.json` | ✅ 外部样例包，用来对照验证链路 |
 
 ## 怎么装
 
@@ -19,19 +18,18 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 irm get.scoop.sh | iex
 ```
 
-然后打开客户端，`toolbox` 源里应该能看到 `ripgrep`，点安装即可。
+然后打开客户端，`toolbox` 源里应该能看到 `hpcl`，点安装即可（HPCL 需要 Java 17+）。
 
 命令行验证：
 
 ```powershell
 scoop bucket add toolbox https://github.com/KJLLin/KJLLin-Toolbox
-scoop install toolbox/ripgrep
-rg --version
+scoop install toolbox/hpcl
+hpcl
 ```
 
-## 换成自己的应用需要什么
+## 发布新版本
 
-1. 应用仓库建好，打 tag 发 Release，上传 zip
-2. 把清单里的 `url` 指向真实 `releases/download/<tag>/<file>.zip`
-3. `hash` 换成真实 zip 的 SHA256（`Get-FileHash xxx.zip -Algorithm SHA256`）
-4. `bin` 写解压后的 exe 路径
+1. 在 `HPCL-Launcher` 打 tag `v3.18.0` 并发 Release（带 `HPCL-3.18.0.exe` 和 `SHA256SUMS.txt`）
+2. 改本仓库 `bucket/hpcl.json` 的 `version` 与 `hash`（哈希从 `SHA256SUMS.txt` 里拿）
+3. `autoupdate` 会自动拼 `v$version/HPCL-$version.exe`，所以不用改 URL 模板
