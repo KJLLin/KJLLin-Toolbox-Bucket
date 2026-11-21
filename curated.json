@@ -1,19 +1,35 @@
 {
-    "apps": [
-        "7zip",
-        "vscode",
-        "everything",
-        "obsidian",
-        "powertoys",
-        "notepadplusplus",
-        "potplayer",
-        "snipaste",
-        "git",
-        "ripgrep",
-        "quicklook",
-        "bandizip",
-        "googlechrome",
-        "firefox",
-        "steam"
-    ]
+  "apps": [
+    "7zip",
+    "vscode",
+    "everything",
+    "obsidian",
+    "powertoys",
+    "notepadplusplus",
+    "potplayer",
+    "snipaste",
+    "git",
+    "ripgrep",
+    "quicklook",
+    "bandizip",
+    "googlechrome",
+    "firefox",
+    "steam"
+  ],
+  "winget": {
+    "7zip": "7zip.7zip",
+    "vscode": "Microsoft.VisualStudioCode",
+    "everything": "voidtools.Everything",
+    "obsidian": "Obsidian.Obsidian",
+    "powertoys": "Microsoft.PowerToys",
+    "notepadplusplus": "Notepad++.Notepad++",
+    "potplayer": "Daum.PotPlayer",
+    "git": "Git.Git",
+    "ripgrep": "BurntSushi.ripgrep.MSVC",
+    "quicklook": "QL-Win.QuickLook",
+    "bandizip": "Bandisoft.Bandizip",
+    "googlechrome": "Google.Chrome",
+    "firefox": "Mozilla.Firefox",
+    "steam": "Valve.Steam"
+  }
 }
