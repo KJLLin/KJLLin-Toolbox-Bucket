@@ -23,7 +23,7 @@ KJLLin Toolbox（UniGetUI 改造版）的应用清单。
 手动验证：
 
 ```powershell
-scoop bucket add toolbox https://github.com/KJLLin/KJLLin-Toolbox   # 客户端已自动做
+scoop bucket add toolbox https://github.com/KJLLin/KJLLin-Toolbox-Bucket   # 客户端已自动做
 scoop install toolbox/hpcl
 hpcl
 ```
