@@ -1,0 +1,67 @@
+name: mirror-hpcl-release
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (empty = latest)"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download installer from GitHub
+        id: dl
+        run: |
+          GH_API=https://api.github.com/repos/KJLLin/HPCL-Launcher
+          TAG="${{ inputs.tag }}"
+          if [ -z "$TAG" ]; then
+            TAG=$(curl -fsSL "$GH_API/releases/latest" | jq -r .tag_name)
+          fi
+          URL=$(curl -fsSL "$GH_API/releases/tags/$TAG" | jq -r '.assets[] | select(.name|endswith(".exe")) | .browser_download_url' | head -1)
+          NAME=$(basename "$URL")
+          curl -fsSL -o "$NAME" "$URL"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "file=$NAME" >> "$GITHUB_OUTPUT"
+          echo "size=$(stat -c%s "$NAME")" >> "$GITHUB_OUTPUT"
+          echo "sha256=$(sha256sum "$NAME" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          ls -l "$NAME"
+
+      - name: Publish to Gitee release
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+          TAG: ${{ steps.dl.outputs.tag }}
+          FILE: ${{ steps.dl.outputs.file }}
+          SIZE: ${{ steps.dl.outputs.size }}
+        run: |
+          API=https://gitee.com/api/v5/repos/kjllin/kjllin-toolbox
+          REL=$(curl -fsSL "$API/releases/tags/$TAG?access_token=$GITEE_TOKEN" || true)
+          ID=$(echo "$REL" | jq -r '.id // empty')
+          if [ -z "$ID" ]; then
+            echo "creating release $TAG"
+            ID=$(curl -fsSL -X POST "$API/releases" \
+              -d "access_token=$GITEE_TOKEN" -d "tag_name=$TAG" \
+              -d "name=HPCL Launcher ${TAG#v} (mirror)" \
+              -d "body=HPCL Launcher installer mirrored for mainland China users." \
+              -d "target_commitish=main" | jq -r .id)
+          fi
+          echo "release id=$ID"
+
+          ATT=$(curl -fsSL "$API/releases/$ID/attach_files?access_token=$GITEE_TOKEN")
+          EXIST=$(echo "$ATT" | jq -r --arg n "$FILE" '[.[] | select(.name==$n) | .size] | first // empty')
+          if [ "$EXIST" = "$SIZE" ]; then
+            echo "already mirrored ($FILE, $SIZE bytes) — nothing to do"
+            exit 0
+          fi
+          if [ -n "$EXIST" ]; then
+            echo "size mismatch ($EXIST vs $SIZE) — uploading again"
+          fi
+          curl -fsSL -X POST "$API/releases/$ID/attach_files" \
+            -F "access_token=$GITEE_TOKEN" -F "file=@$FILE"
+          echo "uploaded $FILE"

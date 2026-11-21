@@ -3,7 +3,7 @@
     "description": "Minecraft 启动器：HMCL 3.16.4 内核 + PCL2 视觉与动画复刻（JavaFX）",
     "homepage": "https://github.com/KJLLin/HPCL-Launcher",
     "license": "GPL-3.0-only",
-    "url": "https://github.com/KJLLin/HPCL-Launcher/releases/download/v3.17.0/HPCL-3.17.0.exe#/HPCL.exe",
+    "url": "https://gitee.com/kjllin/kjllin-toolbox/releases/download/v3.17.0/HPCL-3.17.0.exe#/HPCL.exe",
     "hash": "sha256:4f0128cfaef3f59e96f443e8e5d2b7e068b326e983193404042f6bd9833bc476",
     "bin": "HPCL.exe",
     "shortcuts": [
@@ -17,6 +17,6 @@
         "github": "https://github.com/KJLLin/HPCL-Launcher"
     },
     "autoupdate": {
-        "url": "https://github.com/KJLLin/HPCL-Launcher/releases/download/v$version/HPCL-$version.exe#/HPCL.exe"
+        "url": "https://gitee.com/kjllin/kjllin-toolbox/releases/download/v$version/HPCL-$version.exe#/HPCL.exe"
     }
 }
