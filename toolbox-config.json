@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "engine": "winget",
+  "curated": [
+    "7zip.7zip",
+    "Microsoft.VisualStudioCode",
+    "voidtools.Everything",
+    "Obsidian.Obsidian",
+    "Microsoft.PowerToys",
+    "Notepad++.Notepad++",
+    "Daum.PotPlayer",
+    "Git.Git",
+    "BurntSushi.ripgrep.MSVC",
+    "QL-Win.QuickLook",
+    "Bandisoft.Bandizip",
+    "Google.Chrome",
+    "Mozilla.Firefox",
+    "Valve.Steam"
+  ],
+  "mirrors": [
+    "https://gitee.com/kjllin/kjllin-toolbox-bucket/raw/main/",
+    "https://ghfast.top/https://raw.githubusercontent.com/KJLLin/KJLLin-Toolbox-Bucket/main/"
+  ],
+  "shortcuts": true,
+  "announcement": "",
+  "ownedApps": [
+    {
+      "key": "hpcl",
+      "publisher": "KJLLin",
+      "identifier": "KJLLin.HPCL",
+      "displayName": "HPCL Launcher",
+      "description": "Minecraft 启动器 HPCL",
+      "version": "3.17.0",
+      "installerUrl": "https://gitee.com/kjllin/hpcl-launcher/releases/download/v3.17.0/HPCL-3.17.0.exe",
+      "sha256": "4F0128CFAEF3F59E96F443E8E5D2B7E068B326E983193404042F6BD9833BC476",
+      "commandAlias": "HPCL",
+      "shortcutName": "HPCL",
+      "autoInstall": false,
+      "autoUpdate": true
+    }
+  ]
+}
