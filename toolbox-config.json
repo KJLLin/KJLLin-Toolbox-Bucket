@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "engine": "winget",
   "curated": [
     "7zip.7zip",
@@ -17,12 +17,25 @@
     "Mozilla.Firefox",
     "Valve.Steam"
   ],
+  "blockedIds": [],
+  "searchScope": "curated",
   "mirrors": [
     "https://gitee.com/kjllin/kjllin-toolbox-bucket/raw/main/",
     "https://ghfast.top/https://raw.githubusercontent.com/KJLLin/KJLLin-Toolbox-Bucket/main/"
   ],
+  "refreshHours": 6,
   "shortcuts": true,
+  "desktopShortcuts": false,
   "announcement": "",
+  "notice": {
+    "id": "welcome-v1",
+    "level": "info",
+    "title": "欢迎使用 KJLLin Toolbox",
+    "message": "精选目录、镜像顺序和自有应用都由云端下发，以后调整不需要重装客户端。",
+    "url": "https://gitee.com/kjllin/kjllin-toolbox-bucket",
+    "urlLabel": "查看配置仓库",
+    "closable": true
+  },
   "ownedApps": [
     {
       "key": "hpcl",
