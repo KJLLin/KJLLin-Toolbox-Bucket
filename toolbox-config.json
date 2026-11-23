@@ -19,6 +19,51 @@
   ],
   "blockedIds": [],
   "searchScope": "curated",
+  "sections": [
+    {
+      "key": "essentials",
+      "title": "必备工具",
+      "description": "装完就能用",
+      "ids": [
+        "KJLLin.HPCL",
+        "7zip.7zip",
+        "voidtools.Everything",
+        "Bandisoft.Bandizip",
+        "Notepad++.Notepad++"
+      ]
+    },
+    {
+      "key": "dev",
+      "title": "开发与效率",
+      "description": "写代码和折腾系统",
+      "ids": [
+        "Microsoft.VisualStudioCode",
+        "Git.Git",
+        "BurntSushi.ripgrep.MSVC",
+        "Microsoft.PowerToys"
+      ]
+    },
+    {
+      "key": "read-media",
+      "title": "阅读与媒体",
+      "description": "看文档、放视频",
+      "ids": [
+        "Obsidian.Obsidian",
+        "Daum.PotPlayer",
+        "QL-Win.QuickLook"
+      ]
+    },
+    {
+      "key": "web-game",
+      "title": "浏览器与游戏",
+      "description": "上网和打游戏",
+      "ids": [
+        "Google.Chrome",
+        "Mozilla.Firefox",
+        "Valve.Steam"
+      ]
+    }
+  ],
   "updatesScope": "store",
   "installedScope": "all",
   "mirrors": [
