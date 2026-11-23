@@ -19,6 +19,8 @@
   ],
   "blockedIds": [],
   "searchScope": "curated",
+  "updatesScope": "store",
+  "installedScope": "all",
   "mirrors": [
     "https://gitee.com/kjllin/kjllin-toolbox-bucket/raw/main/",
     "https://ghfast.top/https://raw.githubusercontent.com/KJLLin/KJLLin-Toolbox-Bucket/main/"
