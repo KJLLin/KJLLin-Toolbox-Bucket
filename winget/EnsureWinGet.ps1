@@ -30,8 +30,25 @@ $officialBase = 'https://github.com/microsoft/winget-cli/releases/download/v1.29
 $depsZip      = 'DesktopAppInstaller_Dependencies.zip'
 $bundleFile   = 'Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
 
-# --- pinned packages (App Installer 1.29.380, x64) -------------------------
-$packages = @(
+# --- host architecture -----------------------------------------------------
+# PROCESSOR_ARCHITECTURE lies inside an x64-emulated process on ARM64, so the
+# managed OSArchitecture is asked first and the env var only serves as a fallback.
+function Get-HostArch {
+    try {
+        switch ([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()) {
+            'Arm64' { return 'arm64' }
+            'X64'   { return 'x64' }
+            'X86'   { return 'x86' }
+            default { return 'x64' }
+        }
+    } catch {}
+    if ($env:PROCESSOR_ARCHITECTURE -eq 'ARM64') { return 'arm64' }
+    if ($env:PROCESSOR_ARCHITECTURE -eq 'x86') { return 'x86' }
+    return 'x64'
+}
+
+# --- pinned packages (App Installer 1.29.380, both architectures) ----------
+$x64Packages = @(
     [pscustomobject]@{
         File    = 'Microsoft.VCLibs.140.00_14.0.33519.0_x64.appx'
         Size    = 896581
@@ -65,6 +82,44 @@ $packages = @(
         InBundle = $true
     }
 )
+
+$arm64Packages = @(
+    [pscustomobject]@{
+        File    = 'Microsoft.VCLibs.140.00_14.0.33519.0_arm64.appx'
+        Size    = 1570406
+        Sha     = 'C73D0F55DDA331F9DCBEFC99FF5A420B62120773D2917387639382AA478533EE'
+        PkgName = 'Microsoft.VCLibs.140.00'
+        Entry   = 'arm64/Microsoft.VCLibs.140.00_14.0.33519.0_arm64.appx'
+        InBundle = $false
+    },
+    [pscustomobject]@{
+        File    = 'Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_arm64.appx'
+        Size    = 11161325
+        Sha     = '831118F2F5CAC8E29284E4ECC23BF4236436CCC2EA4A7C225C4946F8CFD29DD3'
+        PkgName = 'Microsoft.VCLibs.140.00.UWPDesktop'
+        Entry   = 'arm64/Microsoft.VCLibs.140.00.UWPDesktop_14.0.33728.0_arm64.appx'
+        InBundle = $false
+    },
+    [pscustomobject]@{
+        File    = 'Microsoft.WindowsAppRuntime.1.8_8000.616.304.0_arm64.appx'
+        Size    = 23780657
+        Sha     = '70A518282C2CE7FF7579870958C059BED48323BEF9B1020632BA10C41BAC27A0'
+        PkgName = 'Microsoft.WindowsAppRuntime.1.8'
+        Entry   = 'arm64/Microsoft.WindowsAppRuntime.1.8_8000.616.304.0_arm64.appx'
+        InBundle = $false
+    },
+    [pscustomobject]@{
+        File    = 'AppInstaller_arm64.msix'
+        Size    = 61973708
+        Sha     = '0D620E0B049A7A899EB72FD936AC9D1F67EC85C425E27B57AAB8DFADC3ED7FB8'
+        PkgName = 'Microsoft.DesktopAppInstaller'
+        Entry   = 'AppInstaller_arm64.msix'
+        InBundle = $true
+    }
+)
+
+$hostArch = Get-HostArch
+$packages = if ($hostArch -eq 'arm64') { $arm64Packages } else { $x64Packages }
 
 # --- helpers ---------------------------------------------------------------
 function Test-WinGetVersion {
@@ -184,9 +239,9 @@ if ($CheckOnly) {
     exit 1
 }
 
-Write-Log "winget not available, bootstrapping App Installer 1.29.380 (x64)"
+Write-Log "winget not available, bootstrapping App Installer 1.29.380 ($hostArch)"
 
-if ([Environment]::Is64BitOperatingSystem -eq $false) {
+if ($hostArch -eq 'x86') {
     Write-Log "32-bit Windows is not supported by this bootstrap, skipping"
     exit 0
 }
@@ -221,7 +276,7 @@ try {
     if ($version) {
         Write-Log "success: winget $version"
     } else {
-        Write-Log "winget is still unavailable after bootstrap (Toolbox will fall back to Scoop)"
+        Write-Log "winget is still unavailable after bootstrap ($hostArch packages were used)"
     }
 } finally {
     try { Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue } catch {}
