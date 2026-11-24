@@ -30,7 +30,8 @@
         "voidtools.Everything",
         "Bandisoft.Bandizip",
         "Notepad++.Notepad++"
-      ]
+      ],
+      "icon": "package"
     },
     {
       "key": "dev",
@@ -41,7 +42,8 @@
         "Git.Git",
         "BurntSushi.ripgrep.MSVC",
         "Microsoft.PowerToys"
-      ]
+      ],
+      "icon": "console"
     },
     {
       "key": "read-media",
@@ -51,7 +53,8 @@
         "Obsidian.Obsidian",
         "Daum.PotPlayer",
         "QL-Win.QuickLook"
-      ]
+      ],
+      "icon": "collections_add"
     },
     {
       "key": "web-game",
@@ -61,7 +64,8 @@
         "Google.Chrome",
         "Mozilla.Firefox",
         "Valve.Steam"
-      ]
+      ],
+      "icon": "steam"
     }
   ],
   "updatesScope": "store",
