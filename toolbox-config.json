@@ -35,7 +35,7 @@
     },
     {
       "key": "dev",
-      "title": "开发与效率",
+      "title": "开发",
       "description": "写代码和折腾系统",
       "ids": [
         "Microsoft.VisualStudioCode",
@@ -47,7 +47,7 @@
     },
     {
       "key": "read-media",
-      "title": "阅读与媒体",
+      "title": "媒体",
       "description": "看文档、放视频",
       "ids": [
         "Obsidian.Obsidian",
@@ -58,7 +58,7 @@
     },
     {
       "key": "web-game",
-      "title": "浏览器与游戏",
+      "title": "游戏",
       "description": "上网和打游戏",
       "ids": [
         "Google.Chrome",
